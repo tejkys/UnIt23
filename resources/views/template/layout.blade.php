@@ -31,13 +31,33 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
+            @if(empty(session('username', '')))
+            <form method="post" action="{{ route('auth.login') }}" class="d-flex">
+                @csrf
+
+                <input name="username" class="form-control me-2" type="text" placeholder="Username" aria-label="Username">
+                <input name="password" class="form-control me-2" type="password" placeholder="Password" aria-label="Password">
+                <button class="btn btn-primary" type="submit">Login</button>
+
+            </form>
+            @else
+                <div class="d-flex align-items-center">
+                <div class="font-monospace text-light p-2">Vítejte {{session('username')}}</div>
+                <a href="{{ route('auth.logout') }}" class="btn btn-primary">Odhlásit</a>
+                </div>
+            @endif
         </div>
     </nav>
+
+</div>
+<div class="container">
+    @if (Session::has('message'))
+        <div class="alert alert-info">
+            {{ Session::get('message') }}
+        </div>
+    @endif
 </div>
 <div class="container p-5">
-    <div class="menu">
-
-    </div>
 
     @yield('content')
 </div>
