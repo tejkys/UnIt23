@@ -9,8 +9,9 @@
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
         crossorigin="anonymous"></script>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/935ca818bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -31,10 +32,15 @@
             @if(empty(session('username', '')))
             <form method="post" action="{{ route('auth.login') }}" class="d-flex">
                 @csrf
-
-                <input name="username" class="form-control me-2" type="text" placeholder="Username" aria-label="Username">
-                <input name="password" class="form-control me-2" type="password" placeholder="Password" aria-label="Password">
-                <button class="btn btn-primary" type="submit">Login</button>
+                <div class="input-group me-2">
+                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                    <input name="username" class="form-control form-control-sm" type="text" placeholder="Username" aria-label="Username">
+                </div>
+                <div class="input-group me-2">
+                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                    <input name="password" class="form-control form-control-sm" type="password" placeholder="Password" aria-label="Password">
+                </div>
+                <button class="btn btn-primary border" type="submit">Login</button>
 
             </form>
             @else
