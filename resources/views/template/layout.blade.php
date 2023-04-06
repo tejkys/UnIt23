@@ -13,6 +13,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/935ca818bb.js" crossorigin="anonymous"></script>
+
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -20,6 +21,8 @@
             }
         });
     </script>
+    <script src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
