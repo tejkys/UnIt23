@@ -22,11 +22,21 @@
                     <div class="d-flex">
 
                         <div class="p-2 h4">Částka k rozdělení:</div>
-                        <div class="border w-25 text-center border-4 border-success rounded-2 p-2">
+                        <div class="border w-25 text-center border-4  rounded-2 p-2">
                             <span class="h4 fw-bold">30000{{-- $in->castka --}}</span></div>
                     </div>
-                    <div>
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="p-2">
 
+                            </div>
+                            <div class="p-2">
+
+                            </div>
+                        </div>
+                        <div class="col-1">
+
+                        </div>
                     </div>
                 </div>
             </div>
