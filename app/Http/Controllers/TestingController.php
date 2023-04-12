@@ -53,4 +53,11 @@ class TestingController extends Controller
 
         return $response;
     }
+    public function post(Request $request){
+        return strtoupper($request->value);
+    }
+    public function view(Request $request)
+    {
+        return view('test');
+    }
 }
