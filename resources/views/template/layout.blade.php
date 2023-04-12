@@ -30,13 +30,12 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <li class=""></li>
-            </ul>
-                <div class="d-flex align-items-center">
-                <div class="font-monospace text-light p-2">Vítejte</div>
 
+            </ul>
+                <div class="font-monospace text-light p-2">Vítejte</div>
                 </div>
-        </div>
+
+
     </nav>
 
 
