@@ -14,10 +14,10 @@
                     <div class="mb-3">
                         <label for="exampleFormControlSelect1" class="form-label">Typ pravidla</label>
                         <select class="form-select" id="ruleTypeSelect">
-                            <option value="procenta">Procenta</option>
-                            <option value="procenta">Absolutní částka</option>
-                            <option value="hodnota">Celková hodnota</option>
-                            <option value="zbytek">Zbytek</option>
+                            <option value="relative">Procenta</option>
+                            <option value="absolute">Absolutní částka</option>
+                            <option value="value">Celková hodnota</option>
+                            <option value="rest">Zbytek</option>
                         </select>
                     </div>
                     <div class="mb-3">

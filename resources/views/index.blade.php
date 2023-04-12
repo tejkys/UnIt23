@@ -35,14 +35,16 @@
                             <div class="m-2">
                                 <select class="form-select form-select-lg mb-3" id="selectRuleSet">
                                     <option selected hidden value="">Vybrat sadu</option>
+                                    <option value="">Žádná sada</option>
                                     @foreach($ruleSets as $ruleSet)
                                         <option class="ruleSetItems" value="{{ json_encode($ruleSet) }}" {{ ($invoice->suitableRuleSet != null && $invoice->suitableRuleSet->id == $ruleSet->id ?"selected" : "") }}>{{ $ruleSet->name }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
-                            <div class="m-0 d-flex justify-content-center">
-                                <button type="button" class="btn btn-dark p-2">Rozúčtovat</button>
+                            <div class="m-0 d-flex justify-content-center gap-2">
+                                <button id="btnResult" type="button" class="btn btn-dark p-2">Rozúčtovat</button>
+                                <button id="btnSave" type="button" class="btn btn-dark p-2" style="display:none;" >Uložit sadu</button>
                             </div>
                         </div>
                         <div class="col-1"></div>
@@ -59,8 +61,11 @@
                                 <tbody id="ruleTable">
                                 <script>
                                     $('#selectRuleSet').change(function (){
-                                        let arrayRuleFromSet = JSON.parse(this.value);
                                         rulesArray = [];
+                                        if(this.value != ""){
+                                        let arrayRuleFromSet = JSON.parse(this.value);
+
+                                            console.log(arrayRuleFromSet);
                                         arrayRuleFromSet.rules.forEach(e =>
                                         rulesArray.push(
                                             {id: e.id,
@@ -69,7 +74,10 @@
                                                 resort: e.resort_id
                                             }
                                     ));
-                                    refresh();
+                                        ruleID = arrayRuleFromSet.rules.length+1;
+
+                                    }
+                                            refresh();
                                     }
                                     );
                                     var rulesArray = [
@@ -108,41 +116,88 @@
                             </table>
                         </div>
                     </div>
+                        <script>
+                            $('#btnResult').click(function(){
+                                resultArray = [];
+                                calculate();
+                                refreshResults();
+                                $('#btnSave').show();
+                            });
+                            var resultArray = [];
+                            function refreshResults() {
+
+                                $('#resultTable').html("");
+
+                                // Loop through each rule object in the array and append a new table row
+                                $.each(resultArray, function(index, result) {
+                                    let newRow = $('<tr>');
+                                    newRow.append($('<td>').text(result.id));
+                                    newRow.append('</td>');
+                                    newRow.append($('<td>').text(result.resortId));
+                                    newRow.append('</td>');
+                                    newRow.append($('<td>').text(result.usedRule));
+                                    newRow.append('</td>');
+                                    newRow.append($('<td>').text(result.price));
+                                    newRow.append('</td>');
+                                    newRow.append('</tr>');
+                                    $('#resultTable').prepend(newRow);
+                                });
+                            };
+
+                            function calculate(){
+                                let sumPrice = {{ $invoice->sumCelkem }};
+                                let tempPrice = sumPrice;
+                                let remainingSumRule = null;
+                                let idx = 1;
+                                rulesArray.forEach(e =>
+                                    {
+                                        let result = {id: idx++, usedRule: e.id, resortId: e.resort};
+
+                                        switch(e.type){
+                                            case "relative":
+                                                result.price = sumPrice * (e.value /100);
+                                                tempPrice = tempPrice - result.price;
+                                                resultArray.push(result);
+
+                                                break;
+                                            case "absolute":
+                                                result.price = e.value;
+                                                tempPrice = tempPrice - e.value;
+                                                resultArray.push(result);
+                                                break;
+                                            case "value":
+                                                result.price = sumPrice;
+                                                tempPrice = 0;
+                                                resultArray.push(result);
+                                                break;
+                                            case "rest":
+                                                remainingSumRule = e;
+                                                idx--;
+                                                break;
+                                        }
+
+                                    }
+                                );
+
+                                if(remainingSumRule != null){
+                                    let result = {id: idx++, usedRule: remainingSumRule.id, resortId: remainingSumRule.resort};
+                                    result.price = tempPrice;
+                                    resultArray.push(result);
+                                }
+                            }
+                        </script>
                     <div class="row d-flex justify-content-center mt-4">
                         <table class="table table-hover w-75 border">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Název</th>
+                                <th scope="col">Středisko</th>
                                 <th scope="col">Pravidlo</th>
                                 <th scope="col">Částka</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Název 1</td>
-                                <td>Pravidlo 1</td>
-                                <td>100 Kč</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Název 2</td>
-                                <td>Pravidlo 2</td>
-                                <td>200 Kč</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Název 3</td>
-                                <td>Pravidlo 3</td>
-                                <td>300 Kč</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Název 4</td>
-                                <td>Pravidlo 4</td>
-                                <td>400 Kč</td>
-                            </tr>
+                            <tbody id="resultTable">
+
                             </tbody>
                         </table>
                     </div>
