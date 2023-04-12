@@ -14,6 +14,7 @@ class RuleSet extends Model
         'name',
         'company',
         'description_pattern',
+        'price',
     ];
     public function rules(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
