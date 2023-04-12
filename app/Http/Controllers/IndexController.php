@@ -47,6 +47,17 @@ class IndexController extends Controller
             $invoices[] = $invoice;
         }
 
-        return view('index', ["invoices" => $invoices]);
+        $resort = array();
+        foreach (session('objectIds') as $id){
+            $resort = json_decode(
+                Http::withUrlParameters([
+                    'endpoint' => session("companyUrl"),
+                    'page' => 'stredisko',
+                    'auth' => session("authSessionId"),
+                ])->get('{+endpoint}/{page}.json?authSessionId={auth}'));
+            $resorts[] = $resort;
+        }
+
+        return view('index', ["invoices" => $invoices,"resort" => $resorts[0]->winstrom->stredisko]);
     }
 }
