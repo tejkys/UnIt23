@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,19 @@ class IndexController extends Controller
                 "companyUrl"=> $request->query("companyUrl"),
             ]
         );
-        return view('index');
+        $invoices = array();
+        foreach (session('objectIds') as $id){
+            $invoice = json_decode(
+            Http::withUrlParameters([
+                'endpoint' => session("companyUrl"),
+                'page' => 'faktura-prijata',
+                'id' => $id,
+                'auth' => session("authSessionId"),
+            ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSession={auth}'));
+            $invoices[] = $invoice;
+        }
+
+
+        return view('index', ["invoices" => $invoices]);
     }
 }
