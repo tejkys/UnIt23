@@ -158,23 +158,23 @@
                                         let result = {id: idx++, usedRule: e.id, resortId: e.resort};
 
                                         switch(e.type){
-                                            case "relative":
+                                            case "procenta":
                                                 result.price = sumPrice * (e.value /100);
                                                 tempPrice = tempPrice - result.price;
                                                 resultArray.push(result);
 
                                                 break;
-                                            case "absolute":
+                                            case "absolutni":
                                                 result.price = e.value;
                                                 tempPrice = tempPrice - e.value;
                                                 resultArray.push(result);
                                                 break;
-                                            case "value":
+                                            case "hodnota":
                                                 result.price = sumPrice;
                                                 tempPrice = 0;
                                                 resultArray.push(result);
                                                 break;
-                                            case "rest":
+                                            case "zbytek":
                                                 remainingSumRule = e;
                                                 idx--;
                                                 break;
