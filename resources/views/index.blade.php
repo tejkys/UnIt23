@@ -45,6 +45,7 @@
                             <div class="m-0 d-flex justify-content-center gap-2">
                                 <button id="btnResult" type="button" class="btn btn-dark p-2">Rozúčtovat</button>
                                 <button id="btnSave" type="button" class="btn btn-dark p-2" style="display:none;" >Uložit sadu</button>
+                                <button id="btnSaveResults" type="button" class="btn btn-success p-2" style="display:none;" >Potvrdit</button>
                             </div>
                         </div>
                         <div class="col-1"></div>
@@ -122,6 +123,7 @@
                                 calculate();
                                 refreshResults();
                                 $('#btnSave').show();
+                                $('#btnSaveResults').show();
                             });
                             var resultArray = [];
                             function refreshResults() {
