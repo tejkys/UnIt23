@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'show'])->name('index');
-//Route::post('/auth', [AuthController::class, 'login'])->name('auth.login');
-//Route::get('/auth', [AuthController::class, 'logout'])->name('auth.logout');
-Route::get('/login', [LoginController::class, 'show'])->name('login');
-Route::get('/test', [TestingController::class, 'get'])->name('testing.get');
+
+Route::get('/test/get', [TestingController::class, 'get'])->name('testing.get');
+Route::post('/test/post', [TestingController::class, 'post'])->name('testing.post');
+Route::get('/test', [TestingController::class, 'view'])->name('testing.view');
