@@ -28,6 +28,7 @@ class RulesController extends Controller
         $rule->rule_type = $request->rule_type;
         $rule->value = $request->value;
         $rule->rule_set_id = $request->rule_set_id;
+        $rule->resort_id = $request->resort_id;
         $rule->save();
     }
     public function addRuleSet(Request $request){
