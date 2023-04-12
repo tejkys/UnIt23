@@ -30,36 +30,12 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('index') ? "active" : "" }}" href="{{ route('index') }}">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
+                <li class=""></li>
             </ul>
-            @if(empty(session('username', '')))
-            <form method="post" action="{{ route('auth.login') }}" class="d-flex">
-                @csrf
-                <div class="input-group me-2">
-                    <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
-                    <input name="username" class="form-control form-control-sm" type="text" placeholder="Username" aria-label="Username">
-                </div>
-                <div class="input-group me-2">
-                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
-                    <input name="password" class="form-control form-control-sm" type="password" placeholder="Password" aria-label="Password">
-                </div>
-                <button class="btn btn-primary border" type="submit">Login</button>
-
-            </form>
-            @else
                 <div class="d-flex align-items-center">
-                <div class="font-monospace text-light p-2">Vítejte {{session('username')}}</div>
-                <a href="{{ route('auth.logout') }}" class="btn btn-primary">Odhlásit</a>
+                <div class="font-monospace text-light p-2">Vítejte</div>
+
                 </div>
-            @endif
         </div>
     </nav>
 
