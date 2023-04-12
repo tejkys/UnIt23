@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'show'])->name('index');
 Route::post('/invoices/update-invoice-items', [InvoicesController::class, 'updateInvoiceItems'])->name('invoices.update-invoice-items');
 
-Route::post('/invoices/update-invoice-items', [RulesController::class, 'updateInvoiceItems'])->name('invoices.update-invoice-items');
+Route::post('/rules', [RulesController::class, 'addRuleSet'])->name('rules.add-rule-set');
+
 
 
 Route::get('/test/get', [TestingController::class, 'get'])->name('testing.get');

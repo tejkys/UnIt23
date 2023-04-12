@@ -47,6 +47,7 @@
                                 <button id="btnSave" type="button" class="btn btn-dark p-2" style="display:none;" >Uložit sadu</button>
                                 <button id="btnSaveResults" type="button" class="btn btn-success p-2" style="display:none;" >Potvrdit</button>
                             </div>
+
                         </div>
                         <div class="col-1"></div>
                         <div class="col-7 ">
@@ -189,6 +190,25 @@
                                     resultArray.push(result);
                                 }
                             }
+                            $("#btnSave").click(function(e) {
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "{{ route('rules.add-rule-set') }}",
+                                    data: {
+                                        'name': $("#ruleSetName").val(),
+                                        'company': "{{ $invoice->nazFirmy }}",
+                                        'description_patter':  $("#descriptionPattern").val(),
+                                        'price': "{{ $invoice->sumCelkem }}",
+                                        'rules': resultArray
+                                    },
+                                    success: function(data)
+                                    {
+                                        alert("Požadavek byl úspěšně zpracován");
+                                    }
+                                });
+
+                            });
                         </script>
                     <div class="row d-flex justify-content-center mt-4">
                         <table class="table table-hover w-75 border">
