@@ -44,7 +44,7 @@ class IndexController extends Controller
                 'id' => $id,
                 'auth' => session("authSessionId"),
             ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSessionId={auth}'));
-            $invoices[] = $invoice;
+            $invoices[] = $invoice->winstrom->{'faktura-prijata'}[0];
         }
 
         return view('index', ["invoices" => $invoices]);

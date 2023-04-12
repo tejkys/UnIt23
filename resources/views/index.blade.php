@@ -6,18 +6,20 @@
     <div class="container-fluid bg-light w-100">
         <div class="border-bottom h-25 bg-white p-3">
             <div>
+                @foreach($invoices as $invoice)
                 <div class="d-block">
                     <div>
-                        <span>Název firmy: {{--$invoice->nazev--}} </span>
+                        <span>Název firmy: {{ $invoice->nazFirmy }} </span>
                     </div>
                     <div>
-                        <span>Celková částka: {{-- $invoice->celkova_castka --}} </span>
+                        <span>Celková částka: {{ $invoice->sumCelkem }} </span>
                     </div>
                     <div>
-                        <span>Popis: {{-- $invoice->popis --}}</span>
+                        <span>Popis: {{ $invoice->popis }}</span>
                     </div>
                 </div>
                 <hr class="hr">
+                @endforeach
                 <div>
                     <div class="d-flex">
 
