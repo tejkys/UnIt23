@@ -49,7 +49,7 @@ class IndexController extends Controller
                 'auth' => session("authSessionId"),
             ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSessionId={auth}'));
             $suitableRuleSet = $ruleSets
-                ->where('company', $invoice->winstrom->{'faktura-prijata'}[0]->nazFirmy, )
+                ->where('company', $invoice->winstrom->{'faktura-prijata'}[0]->nazFirmy )
                 ->where('price', $invoice->winstrom->{'faktura-prijata'}[0]->sumCelkem)
                 ->filter(function ($item) use ($invoice){
                     return str_contains($invoice->winstrom->{'faktura-prijata'}[0]->popis, $item->description_pattern);
