@@ -33,11 +33,10 @@
                     <div class="row pt-2">
                         <div class="col-4 d-flex flex-column text-center align-content-center">
                             <div class="m-2">
-                                <select class="form-select form-select-lg mb-3">
+                                <select class="form-select form-select-lg mb-3" id="selectRuleSet">
                                     <option selected hidden value="">Vybrat sadu</option>
-                                    <option value="">Vyberte</option>
                                     @foreach($ruleSets as $ruleSet)
-                                        <option value="{{ json_encode($ruleSet) }}" {{ ($invoice->suitableRuleSet != null && $invoice->suitableRuleSet->id == $ruleSet->id ?"selected" : "") }}>{{ $ruleSet->name }}</option>
+                                        <option class="ruleSetItems" value="{{ json_encode($ruleSet) }}" {{ ($invoice->suitableRuleSet != null && $invoice->suitableRuleSet->id == $ruleSet->id ?"selected" : "") }}>{{ $ruleSet->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -59,12 +58,27 @@
                                 </thead>
                                 <tbody id="ruleTable">
                                 <script>
+                                    $('#selectRuleSet').change(function (){
+                                        let arrayRuleFromSet = JSON.parse(this.value);
+                                        rulesArray = [];
+                                        arrayRuleFromSet.rules.forEach(e =>
+                                        rulesArray.push(
+                                            {id: e.id,
+                                                type: e.rule_type,
+                                                value: e.value,
+                                                resort: e.resort_id
+                                            }
+                                    ));
+                                    refresh();
+                                    }
+                                    );
                                     var rulesArray = [
 
                                     ];
                                     var ruleID = 1;
                                     $(document).ready(refresh());
                                     function refresh() {
+
                                         $('#ruleTable').find("tr:not(:last)").remove();
 
                                         // Loop through each rule object in the array and append a new table row
@@ -94,7 +108,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center mt-4">
                         <table class="table table-hover w-75 border">
                             <thead>
                             <tr>
