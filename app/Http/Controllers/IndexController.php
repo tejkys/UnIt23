@@ -20,6 +20,7 @@ class IndexController extends Controller
             $request->session()->flash('message','Vyžadují se parametry pro zpracování položky!');
             return view('index');
         }
+
         $ids = array();
         if(array_key_exists("objectIds", $request->query())){
             $ids = array_merge($ids, explode(",", $request->query("objectIds")));
