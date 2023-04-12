@@ -42,11 +42,12 @@ class IndexController extends Controller
                 'page' => 'faktura-prijata',
                 'id' => $id,
                 'auth' => session("authSessionId"),
-            ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSession={auth}'));
+            ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSessionId={auth}'));
             $invoices[] = $invoice;
         }
 
 
+        dump($invoice);
         return view('index', ["invoices" => $invoices]);
     }
 }
