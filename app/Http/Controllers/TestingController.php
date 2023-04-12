@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RuleSet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
@@ -28,7 +29,14 @@ class TestingController extends Controller
     */
     public function get(Request $request)
     {
-        $response = Http::get('http://example.com');
+        $ruleSet = new RuleSet();
+        $ruleSet->name = "a";
+        $ruleSet->company = "b";
+        $ruleSet->description_pattern = "b";
+        $ruleSet->price = 0;
+        $ruleSet->save();
+
+        //$response = Http::get('http://example.com');
 //        Http::withUrlParameters([
 //            'endpoint' => 'https://laravel.com',
 //            'page' => 'docs',
@@ -51,7 +59,7 @@ class TestingController extends Controller
 //            'role' => 'Network Administrator',
 //        ]);
 
-        return $response;
+        return "asd";
     }
     public function post(Request $request){
         return strtoupper($request->value);
