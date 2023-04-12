@@ -14,5 +14,6 @@ class Rule extends Model
         'rule_type',
         'rule_set_id',
         'value',
+        'resort_id',
     ];
 }
