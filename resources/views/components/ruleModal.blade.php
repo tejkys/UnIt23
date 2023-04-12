@@ -15,7 +15,7 @@
                         <label for="exampleFormControlSelect1" class="form-label">Typ pravidla</label>
                         <select class="form-select" id="ruleTypeSelect">
                             <option value="procenta">Procenta</option>
-                            <option value="procenta">Absolutní částka</option>
+                            <option value="absolutni">Absolutní částka</option>
                             <option value="hodnota">Celková hodnota</option>
                             <option value="zbytek">Zbytek</option>
                         </select>
@@ -40,14 +40,44 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrušit</button>
                     <button type="button" class="btn btn-primary" id="addRuleButton" data-bs-dismiss="modal">Potvrdit</button>
                         <script>
-                            $('#addRuleButton').click(function() {
+                            $('#ruleTypeSelect').on('change', function() {
+                                if ($(this).val() === 'hodnota' || $(this).val() === 'zbytek'){
+                                    $('#valueTextField').prop("disabled", true);
+                                } else {
+                                    $('#valueTextField').prop("disabled", false);
 
+                                }
+                            });
+                            $('#addRuleButton').click(function() {
+                                let castka = $('#castka').text();
+                                let result = 0;
+                                switch ($('#ruleTypeSelect').find(":selected").val()){
+                                    case "procenta": result = (castka - (initialPrice / 100 * $('#valueTextField').val()));break;
+                                    case "absolutni": result = (castka - $('#valueTextField').val());break;
+                                    case "hodnota": result = castka - initialPrice;break;
+                                    case "zbytek": result = 0;break;
+                                }
+
+                                if(result >= 0){
+                                    $('#castka').text(result);
+                                }else{
+                                    alert("Hodnota nesmí být záporná");
+                                    refresh();
+                                    return;
+
+                                }
+                                switch ($('#ruleTypeSelect').find(":selected").val()){
+                                    case "hodnota": initialPrice;break;
+                                    case "zbytek": castka;break;
+                                    default : castka = $('#valueTextField').val();
+                                }
                                 rulesArray.push(   {
                                     id: ruleID++,
                                     type: $('#ruleTypeSelect').find(":selected").val(),
-                                    value: $('#valueTextField').val(),
+                                    value: castka,
                                     resort: $('#resortSelect').find(":selected").val()
                                 });
+
                                 refresh();
 
                             });
