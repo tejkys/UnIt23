@@ -26,12 +26,22 @@
                             <span class="h4 fw-bold">30000{{-- $in->castka --}}</span></div>
                     </div>
                     <div class="row">
-                        <div class="col-1">
-                            <div class="p-2">
+                        <div class="col-4 d-flex flex-column align-content-center">
+                            <div class="m-3">
+                                <select class="form-select form-select-lg mb-3">
+                                    <option selected hidden value="">Vybrat sadu</option>
+                                    {{--
+                                     @foreach($pravidla as $pravidlo)
 
+                                    @endforeach
+                                     --}}
+
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
                             </div>
-                            <div class="p-2">
-
+                            <div class="m-3">
+                                <button type="button" class="btn btn-dark">Vytvořit sadu</button>
                             </div>
                         </div>
                         <div class="col-1">
