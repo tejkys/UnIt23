@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class InvoicesController extends Controller
 {
     public function updateInvoiceItems(Request $request)
     {
-        $invoiceId = $request->id;
-        $items = json_decode($request->items);
+        $invoiceId = $request["id"];
+        $items = $request["data"];
         $jsonString = '{
                       "winstrom": {
                         "@version": "1.0",
@@ -30,10 +30,10 @@ class InvoicesController extends Controller
         foreach ($items as $item) {
             $polozka = (object)array(
                 'mnozMj' => '1',
-                'cenaMj' => $item->price, //here
+                'cenaMj' => $item["price"], //here
                 'typSzbDphK' => 'typSzbDph.dphOsv',
                 'kopStred' => 'false',
-                'stredisko' => $item->resort_id); //here
+                'stredisko' => $item["resortId"]); //here
             $objekt->winstrom->{"faktura-prijata"}[0]->polozkyFaktury[] = $polozka;
         }
         $response = Http::withBody(json_encode($objekt), 'application/json')

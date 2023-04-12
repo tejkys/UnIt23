@@ -222,6 +222,19 @@
                                 });
 
                             });
+                            $( "#btnSaveResults" ).click(function() {
+
+                                let data = {"data":resultArray,"id":{{$invoice->id}}}
+                                $.ajax({
+                                    type: "POST",
+                                    url: "{{route("invoices.update-invoice-items")}}",
+                                    data: data,
+                                    success: function(data)
+                                    {
+                                        alert("Požadavek zpracován");
+                                    }
+                                });
+                            });
                         </script>
                     <div class="row d-flex justify-content-center mt-4">
                         <table class="table table-hover w-75 border">
