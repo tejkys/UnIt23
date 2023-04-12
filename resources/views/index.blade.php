@@ -3,6 +3,7 @@
 @section('title', 'Vítejte')
 
 @section('content')
+@if($valid)
     @foreach($invoices as $invoice)
     <div class="container-fluid bg-light w-100 mb-3">
         <div class="border-bottom h-25 bg-white p-3">
@@ -33,14 +34,11 @@
                             <div class="m-2">
                                 <select class="form-select form-select-lg mb-3">
                                     <option selected hidden value="">Vybrat sadu</option>
-                                    {{--
-                                     @foreach($pravidla as $pravidlo)
+                                        <option value="">Vyberte</option>
+                                        @foreach($ruleSets as $ruleSet)
+                                            <option value="{{ json_encode($ruleSet) }}" {{ ($invoice->suitableRuleSet != null && $invoice->suitableRuleSet->id == $ruleSet->id ?"selected" : "") }}>{{ $ruleSet->name }}</option>
+                                        @endforeach
 
-                                    @endforeach
-                                     --}}
-
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
                                 </select>
                             </div>
                             <div class="m-0 d-flex justify-content-center">
@@ -122,4 +120,5 @@
         </div>
     </div>
     @endforeach
+ @endif
 @endsection

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rule;
+use App\Models\RuleSet;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
@@ -18,7 +20,8 @@ class IndexController extends Controller
 
         ){
             $request->session()->flash('message','Vyžadují se parametry pro zpracování položky!');
-            return view('index');
+            return view('index', ["valid"=>false
+            ]);
         }
 
         $ids = array();
@@ -36,6 +39,7 @@ class IndexController extends Controller
             ]
         );
         $invoices = array();
+        $ruleSets = RuleSet::with('rules')->get();
         foreach (session('objectIds') as $id){
             $invoice = json_decode(
             Http::withUrlParameters([
@@ -44,20 +48,29 @@ class IndexController extends Controller
                 'id' => $id,
                 'auth' => session("authSessionId"),
             ])->get('{+endpoint}/{page}/{id}.json?detail=custom:sumCelkem,nazFirmy,popis&authSessionId={auth}'));
+            $suitableRuleSet = $ruleSets
+                ->where('company', $invoice->winstrom->{'faktura-prijata'}[0]->nazFirmy, )
+                ->where('price', $invoice->winstrom->{'faktura-prijata'}[0]->sumCelkem)
+                ->filter(function ($item) use ($invoice){
+                    return str_contains($invoice->winstrom->{'faktura-prijata'}[0]->popis, $item->description_pattern);
+                })
+                ->first();
+            $invoice->winstrom->{'faktura-prijata'}[0]->suitableRuleSet = $suitableRuleSet;
             $invoices[] = $invoice->winstrom->{'faktura-prijata'}[0];
         }
 
-        $resort = array();
-        foreach (session('objectIds') as $id){
-            $resort = json_decode(
-                Http::withUrlParameters([
-                    'endpoint' => session("companyUrl"),
-                    'page' => 'stredisko',
-                    'auth' => session("authSessionId"),
-                ])->get('{+endpoint}/{page}.json?authSessionId={auth}'));
-            $resorts[] = $resort;
-        }
+        $resorts = json_decode(
+            Http::withUrlParameters([
+                'endpoint' => session("companyUrl"),
+                'page' => 'stredisko',
+                'auth' => session("authSessionId"),
+            ])->get('{+endpoint}/{page}.json?authSessionId={auth}'));
 
-        return view('index', ["invoices" => $invoices,"resort" => $resorts[0]->winstrom->stredisko]);
+        return view('index', [
+            "valid"=> true,
+            "invoices" => $invoices,
+            "resorts" => $resorts->winstrom->stredisko,
+            "ruleSets" => $ruleSets,
+        ]);
     }
 }

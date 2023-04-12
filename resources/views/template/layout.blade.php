@@ -48,8 +48,7 @@
     @endif
 </div>
 <div class="container p-5">
-
-    @yield('content')
+        @yield('content')
 </div>
 </body>
 </html>
