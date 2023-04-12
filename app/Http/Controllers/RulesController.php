@@ -39,12 +39,12 @@ class RulesController extends Controller
         $ruleSet->description_pattern = $request->description_pattern;
         $ruleSet->price = $request->price;
         $ruleSet->save();
-        foreach ($request->rules as $rule){
+        foreach ($request->rules as $_rule){
             $rule = new Rule();
-            $rule->ruled_type =$rule["usedRule"];
-            $rule->resort_id =$rule["resortId"];
+            $rule->rule_type =$_rule["usedRule"];
+            $rule->resort_id =$_rule["resortId"];
             $rule->rule_set_id = $ruleSet->id;
-            $rule->value =$rule["price"];
+            $rule->value =$_rule["price"];
             $rule->save();
         }
     }
