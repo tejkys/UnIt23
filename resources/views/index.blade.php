@@ -35,14 +35,11 @@
                             <div class="m-2">
                                 <select class="form-select form-select-lg mb-3">
                                     <option selected hidden value="">Vybrat sadu</option>
-                                    {{--
-                                     @foreach($pravidla as $pravidlo)
-
+                                    <option value="">Vyberte</option>
+                                    @foreach($ruleSets as $ruleSet)
+                                        <option value="{{ json_encode($ruleSet) }}" {{ ($invoice->suitableRuleSet != null && $invoice->suitableRuleSet->id == $ruleSet->id ?"selected" : "") }}>{{ $ruleSet->name }}</option>
                                     @endforeach
-                                     --}}
 
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
                                 </select>
                             </div>
                             <div class="m-0 d-flex justify-content-center">
