@@ -66,6 +66,34 @@ class TestingController extends Controller
     }
     public function view(Request $request)
     {
+
+        $jsonString = '{
+                      "winstrom": {
+                        "@version": "1.0",
+                        "faktura-prijata": [
+                          {
+                            "id": "300",
+                            "bezPolozek": false,
+                            "polozkyFaktury@removeAll": true,
+                            "polozkyFaktury": [
+
+                            ]
+                          }
+                        ]
+                      }
+                    }';
+        $objekt = json_decode($jsonString);
+        $polozka = (object)array(
+            'mnozMj' => 'foo',
+            'cenaMj' => 'foo',
+            'typSzbDphK' => 'foo',
+            'kopStred' => 'foo',
+            'stredisko' => 'foo');
+        $objekt->winstrom->{"faktura-prijata"}[] = $polozka;
+
+
+        dump($objekt);
+
         return view('test');
     }
 }
