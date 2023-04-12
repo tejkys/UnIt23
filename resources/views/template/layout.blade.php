@@ -24,9 +24,9 @@
     <script src="{{ asset('js/app.js') }}" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container">
+
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="container-fluid">
             <ul class="navbar-nav">
@@ -63,7 +63,7 @@
         </div>
     </nav>
 
-</div>
+
 <div class="container">
     @if (Session::has('message'))
         <div class="alert alert-info alert-dismissible">
@@ -78,3 +78,4 @@
 </div>
 </body>
 </html>
+

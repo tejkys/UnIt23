@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TestingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'show'])->name('index');
 Route::post('/auth', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/auth', [AuthController::class, 'logout'])->name('auth.logout');
-
-Route::get('/test', [\App\Http\Controllers\TestingController::class, 'get'])->name('testing.get');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::get('/test', [TestingController::class, 'get'])->name('testing.get');

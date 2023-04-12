@@ -4,7 +4,7 @@
 
 @section('content')
     @parent
-    <h1>Přihlášení</h1>
+
 
     <div>
         @if (session('status'))
@@ -12,18 +12,23 @@
                 {{ session('status') }}
             </div>
         @endif
-        <form method="post" action="{{ route('auth.login') }}">
+
+
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form method="post" action="{{ route('auth.login') }}" class="p-5 bg-white rounded-3" style="width: 400px;">
             @csrf
-            <div class="mb-3">
-                <label for="username" class="form-label">Uživatelské jméno</label>
-                <input name="username" type="text" class="form-control" id="username" aria-describedby="username-label">
-                <div id="username-label" class="form-text">We'll never share your email with anyone else.</div>
+            <h2 class="text-center mb-4">Přihlášení</h2>
+            <div class="form-floating mb-3">
+                <input name="username" class="form-control form-control-sm" type="text" placeholder="Username" aria-label="Username">
+                <label for="username">Uživatelské jméno</label>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="password">
+            <div class="form-floating mb-3">
+                <input name="password" type="password" class="form-control form-control-sm" id="password" placeholder="Password">
+                <label for="password">Heslo</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Přihlásit se</button>
+            </div>
         </form>
     </div>
 @endsection
