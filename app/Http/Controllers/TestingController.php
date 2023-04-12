@@ -72,7 +72,7 @@ class TestingController extends Controller
                         "@version": "1.0",
                         "faktura-prijata": [
                           {
-                            "id": "300",
+                            "id": "300",//edit
                             "bezPolozek": false,
                             "polozkyFaktury@removeAll": true,
                             "polozkyFaktury": [
@@ -84,13 +84,15 @@ class TestingController extends Controller
                     }';
         $objekt = json_decode($jsonString);
         $polozka = (object)array(
-            'mnozMj' => 'foo',
-            'cenaMj' => 'foo',
-            'typSzbDphK' => 'foo',
-            'kopStred' => 'foo',
-            'stredisko' => 'foo');
+            'mnozMj' => '1',
+            'cenaMj' => 2000, //here
+            'typSzbDphK' => 'typSzbDph.dphOsv',
+            'kopStred' => 'false',
+            'stredisko' => 2); //here
         $objekt->winstrom->{"faktura-prijata"}[] = $polozka;
 
+
+        $response = Http::post(session('companyUrl') . "/faktura-prijata.json?authSessionId=" . session('authSessionId'), [json_encode($objekt)]);
 
         dump($objekt);
 
