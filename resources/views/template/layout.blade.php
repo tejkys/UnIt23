@@ -27,12 +27,12 @@
 <body class="bg-light">
 
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-white">
         <div class="container-fluid">
             <ul class="navbar-nav">
 
             </ul>
-                <div class="font-monospace text-light p-2">Vítejte</div>
+                <div class="font-monospace text-dark p-2">&lt? echo("UPCE (J)ELITA); </div>
                 </div>
 
 

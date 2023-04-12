@@ -27,8 +27,8 @@
                         <div class="border w-25 text-center border-4  rounded-2 p-2">
                             <span class="h4 fw-bold">30000{{-- $in->castka --}}</span></div>
                     </div>
-                    <div class="row">
-                        <div class="col-4 d-flex flex-column align-content-center">
+                    <div class="row pt-2">
+                        <div class="col-4 d-flex flex-column text-center align-content-center">
                             <div class="m-3">
                                 <select class="form-select form-select-lg mb-3">
                                     <option selected hidden value="">Vybrat sadu</option>
@@ -42,12 +42,39 @@
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <div class="m-3">
-                                <button type="button" class="btn btn-dark">Vytvořit sadu</button>
+                            <div class="m-3 d-flex justify-content-center gap-3">
+                                <button type="button" class="btn btn-dark p-2">Rozúčtovat</button>
+                                <button type="button" class="btn btn-dark p-2">Vytvořit sadu</button>
                             </div>
                         </div>
-                        <div class="col-1">
+                        <div class="col-1"></div>
+                        <div class="col-7 ">
+                            <table class="table border border-2">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Typ pravidla</th>
+                                    <th scope="col">Hodnota</th>
+                                    <th scope="col">Středisko</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Jan</td>
+                                    <td>Novák</td>
+                                    <td>25</td>
+                                </tr>
+                                {{-- @foreach pravidla --}}
+                                <!-- Poslední řádek s tlačítkem + -->
+                                <tr>
+                                    <td></td>
 
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm">+</button>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
