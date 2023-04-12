@@ -213,7 +213,7 @@
                                         'company': "{{ $invoice->nazFirmy }}",
                                         'description_patter':  $("#descriptionPattern").val(),
                                         'price': "{{ $invoice->sumCelkem }}",
-                                        'rules': resultArray
+                                        'rules': rulesArray
                                     },
                                     success: function(data)
                                     {

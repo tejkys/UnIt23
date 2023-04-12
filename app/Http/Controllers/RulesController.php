@@ -41,10 +41,10 @@ class RulesController extends Controller
         $ruleSet->save();
         foreach ($request->rules as $_rule){
             $rule = new Rule();
-            $rule->rule_type =$_rule["usedRule"];
-            $rule->resort_id =$_rule["resortId"];
+            $rule->rule_type =$_rule["type"];
+            $rule->resort_id =$_rule["resort"];
             $rule->rule_set_id = $ruleSet->id;
-            $rule->value =$_rule["price"];
+            $rule->value =$_rule["value"];
             $rule->save();
         }
     }
