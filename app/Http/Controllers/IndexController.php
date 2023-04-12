@@ -47,8 +47,6 @@ class IndexController extends Controller
             $invoices[] = $invoice;
         }
 
-
-        dump($invoice);
         return view('index', ["invoices" => $invoices]);
     }
 }
