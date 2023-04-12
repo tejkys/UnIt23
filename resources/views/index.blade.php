@@ -94,6 +94,8 @@
                                             refresh();
                                     }
                                     );
+                                    $('#selectRuleSet').trigger("change");
+
                                     var initialPrice = {{$invoice->sumCelkem}};
                                     var rulesArray = [
 
