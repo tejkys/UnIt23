@@ -46,6 +46,17 @@
                                 <button id="btnResult" type="button" class="btn btn-dark p-2">Rozúčtovat</button>
                                 <button id="btnSave" type="button" class="btn btn-dark p-2" style="display:none;" >Uložit sadu</button>
                                 <button id="btnSaveResults" type="button" class="btn btn-success p-2" style="display:none;" >Potvrdit</button>
+
+                            </div>
+                            <div id="ruleSetParts" style="display:none;" class="w-100 mt-3">
+                                <label for="ruleSetName" class="form-label m-0">Jméno sady</label>
+                                <input type="text" class="form-control" id="ruleSetName"
+                                       placeholder="Jméno sady">
+                                <div class="w-100 pt-2 d-flex flex-column justify-content-center">
+                                    <label for="descriptionPattern" class="form-label m-0">Vzorec popisu</label>
+                                    <input type="text" class="form-control" id="descriptionPattern"
+                                           placeholder="Vzorec popisu">
+                                </div>
                             </div>
                         </div>
                         <div class="col-1"></div>
@@ -62,7 +73,7 @@
                                 <tbody id="ruleTable">
                                 <script>
                                     $('#selectRuleSet').change(function (){
-                                        let arrayRuleFromSet = JSON.parse(this.value);
+
                                         rulesArray = [];
                                         if(this.value != ""){
                                         let arrayRuleFromSet = JSON.parse(this.value);
@@ -126,6 +137,8 @@
                                 refreshResults();
                                 $('#btnSave').show();
                                 $('#btnSaveResults').show();
+                                $('#ruleSetParts').show();
+
                             });
                             var resultArray = [];
                             function refreshResults() {
