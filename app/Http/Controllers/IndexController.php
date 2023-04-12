@@ -11,15 +11,24 @@ class IndexController extends Controller
     public function show(Request $request): View
     {
         if(empty($request->query())
-            || !array_key_exists("objectId", $request->query())
+            || !(array_key_exists("objectId", $request->query()) || array_key_exists("objectIds", $request->query()))
             || !array_key_exists("authSessionId", $request->query())
             || !array_key_exists("companyUrl", $request->query())
 
         ){
-            return view('index')->with(['message'=>'Vyžadují se parametry pro zpracování položky']);
+            $request->session()->flash('message','Vyžadují se parametry pro zpracování položky!');
+            return view('index');
         }
+        $ids = array();
+        if(array_key_exists("objectIds", $request->query())){
+            $ids = array_merge($ids, explode(",", $request->query("objectIds")));
+        }
+        if(array_key_exists("objectId", $request->query())){
+            $ids[] = $request->query("objectId");
+        }
+
         session([
-                "objectId"=>explode(",",$request->query("objectId")),
+                "objectIds"=> $ids,
                 "authSessionId"=> $request->query("authSessionId"),
                 "companyUrl"=> $request->query("companyUrl"),
             ]
