@@ -28,7 +28,7 @@
 
                         <div class="p-2 h4">Částka k rozdělení:</div>
                         <div class="border w-25 text-center border-4  rounded-2 p-2">
-                            <span class="h4 fw-bold">30000{{-- $in->castka --}}</span></div>
+                            <span class="h4 fw-bold" id="castka">{{$invoice->sumCelkem}}</span></div>
                     </div>
                     <div class="row pt-2">
                         <div class="col-4 d-flex flex-column text-center align-content-center">
@@ -62,6 +62,7 @@
                                 <tbody id="ruleTable">
                                 <script>
                                     $('#selectRuleSet').change(function (){
+                                        let arrayRuleFromSet = JSON.parse(this.value);
                                         rulesArray = [];
                                         if(this.value != ""){
                                         let arrayRuleFromSet = JSON.parse(this.value);
@@ -81,6 +82,7 @@
                                             refresh();
                                     }
                                     );
+                                    var initialPrice = {{$invoice->sumCelkem}};
                                     var rulesArray = [
 
                                     ];
