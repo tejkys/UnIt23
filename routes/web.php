@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TestingController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'show'])->name('index');
+Route::post('/invoices/update-invoice-items', [InvoicesController::class, 'updateInvoiceItems'])->name('invoices.update-invoice-items');
+
+Route::post('/invoices/update-invoice-items', [RulesController::class, 'updateInvoiceItems'])->name('invoices.update-invoice-items');
+
 
 Route::get('/test/get', [TestingController::class, 'get'])->name('testing.get');
 Route::post('/test/post', [TestingController::class, 'post'])->name('testing.post');
