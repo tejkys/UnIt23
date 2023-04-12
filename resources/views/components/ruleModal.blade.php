@@ -23,7 +23,7 @@
                     <div class="mb-3">
                         <label for="exampleFormControlSelect2" class="form-label">Středisko</label>
                         <select class="form-select" id="resortSelect">
-                            @foreach($resort as $resortItem)
+                            @foreach($resorts as $resortItem)
                                 <option value="{{$resortItem->id}}">{{$resortItem->nazev}}</option>
                             @endforeach
                         </select>

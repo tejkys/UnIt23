@@ -4,6 +4,7 @@
 
 @section('content')
 @if($valid)
+
     @foreach($invoices as $invoice)
         <div class="container-fluid bg-light w-100 mb-3">
             <div class="border-bottom h-25 bg-white p-3">
@@ -59,22 +60,38 @@
                                     <th scope="col">Středisko</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Procenta</td>
-                                    <td>100</td>
-                                    <td>Středisko C</td>
-                                </tr>
+                                <tbody id="ruleTable">
+                                <script>
+                                    var rulesArray = [
+
+                                    ];
+                                    var ruleID = 1;
+                                    $(document).ready(refresh());
+                                    function refresh() {
+                                        $('#ruleTable').find("tr:not(:last)").remove();
+
+                                        // Loop through each rule object in the array and append a new table row
+                                        $.each(rulesArray, function(index, rule) {
+                                            let newRow = $('<tr>');
+                                            newRow.append($('<td>').text(rule.id));
+                                            newRow.append('</td>');
+                                            newRow.append($('<td>').text(rule.type));
+                                            newRow.append('</td>');
+                                            newRow.append($('<td>').text(rule.value));
+                                            newRow.append('</td>');
+                                            newRow.append($('<td>').text(rule.resort));
+                                            newRow.append('</td>');
+                                            newRow.append('</tr>');
+                                            $('#ruleTable').prepend(newRow);
+                                        });
+                                    };
+                                </script>
                                 {{-- @foreach pravidla --}}
                                 <!-- Poslední řádek s tlačítkem + -->
                                 <tr>
-                                    <td></td>
-
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-sm">+</button>
+                                    <td colspan="4" class="text-center">
+                                        @include('components.ruleModal')
                                     </td>
-                                    <td></td>
                                 </tr>
                                 </tbody>
                             </table>
